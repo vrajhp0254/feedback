@@ -18,22 +18,25 @@ export const authOptions: NextAuthOptions = {
         try {
           const user = await UserModel.findOne({
             $or: [
-                { email: credentials.identifier },
-                { username: credentials.identifier },]
+              { email: credentials.identifier },
+              { username: credentials.identifier },
+            ],
           });
           if (!user) {
-            throw new Error('No user found with this email');
+            throw new Error("No user found with this email");
           }
 
-          if(!user.isVerified){
-            throw new Error('Please verify your account first');
+          if (!user.isVerified) {
+            throw new Error("Please verify your account first");
           }
-          const isPasswordCorret = await bcrypt.compare(credentials.password,user.password)
+          const isPasswordCorret = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
           if (isPasswordCorret) {
-            return user
-            
-          }else{
-            throw new Error('Incorrect password ');
+            return user;
+          } else {
+            throw new Error("Incorrect password ");
           }
         } catch (error: any) {
           throw new Error(error);
@@ -41,7 +44,31 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  pages:{
-    signIn:'/sign-in'
-  }
+  callbacks: {
+    async session({ session, token }) {
+      if (token) {
+          session.user._id =token._id
+          session.user.isVerified= token.isVerified
+          session.user.isAcceptingMessage= token.isAcceptingMessage;
+          session.user.username = token.username;
+      }
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token._id = user._id?.toString()
+        token.isVerified = user.isVerified;
+        token.isAcceptingMessages= user.isAcceptingMessage;
+        token.username = user.username;
+      }
+      return token;
+    },
+  },
+  pages: {
+    signIn: "/sign-in",
+  },
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRECT,
 };

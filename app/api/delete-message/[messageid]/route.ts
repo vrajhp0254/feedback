@@ -3,12 +3,12 @@ import { getServerSession } from "next-auth/next";
 import dbConnect from "@/lib/dbConnect";
 import { User } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/option";
+import mongoose from "mongoose";
 
 export async function DELETE(
   request: Request,
   { params }: { params: { messageid: string } }
 ) {
-  const messageId = params.messageid;
   await dbConnect();
   const session = await getServerSession(authOptions);
   const _user: User = session?.user as User;
@@ -18,13 +18,15 @@ export async function DELETE(
       { status: 401 }
     );
   }
-
+  const userId = new mongoose.Types.ObjectId(_user._id);
+  const messageId = new mongoose.Types.ObjectId(params.messageid);
+  console.log(userId,messageId)
   try {
     const updateResult = await UserModel.updateOne(
-      { _id: _user._id },
+      { _id: userId },
       { $pull: { messages: { _id: messageId } } }
     );
-
+    console.log("is it",updateResult);
     if (updateResult.modifiedCount === 0) {
       return Response.json(
         { message: "Message not found or already deleted", success: false },

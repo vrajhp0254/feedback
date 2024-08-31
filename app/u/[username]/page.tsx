@@ -27,26 +27,14 @@ import { messageSchema } from '@/schemas/messageSchema';
 
 const specialChar = '||';
 
-const parseStringMessages = (messageString: string): string[] => {
-  return messageString.split(specialChar);
-};
-
-const initialMessageString =
-  "What's your favorite movie?||Do you have any pets?||What's your dream job?";
-
 export default function SendMessage() {
+  const [data,setdata] =useState("What's your favorite movie?||Do you have any pets?||What's your dream job?");
   const params = useParams<{ username: string }>();
   const username = params.username;
-
-  const {
-    complete,
-    completion,
-    isLoading: isSuggestLoading,
-    error,
-  } = useCompletion({
-    api: '/api/suggest-messages',
-    initialCompletion: initialMessageString,
-  });
+  const parseStringMessages = (messageString: string): string[] => {
+    return messageString.split(specialChar);
+  };
+  
 
   const form = useForm<z.infer<typeof messageSchema>>({
     resolver: zodResolver(messageSchema),
@@ -88,7 +76,10 @@ export default function SendMessage() {
 
   const fetchSuggestedMessages = async () => {
     try {
-      complete('');
+      // complete('');
+      const response = await axios.post('/api/suggest-messages', {});
+      if(response){
+       setdata(response.data);}
     } catch (error) {
       console.error('Error fetching messages:', error);
       // Handle error appropriately
@@ -139,7 +130,6 @@ export default function SendMessage() {
           <Button
             onClick={fetchSuggestedMessages}
             className="my-4"
-            disabled={isSuggestLoading}
           >
             Suggest Messages
           </Button>
@@ -150,10 +140,8 @@ export default function SendMessage() {
             <h3 className="text-xl font-semibold">Messages</h3>
           </CardHeader>
           <CardContent className="flex flex-col space-y-4">
-            {error ? (
-              <p className="text-red-500">{error.message}</p>
-            ) : (
-              parseStringMessages(completion).map((message, index) => (
+            {
+              parseStringMessages(data).map((message, index) => (
                 <Button
                   key={index}
                   variant="outline"
@@ -162,7 +150,7 @@ export default function SendMessage() {
                 >
                   {message}
                 </Button>
-              ))
+              )
             )}
           </CardContent>
         </Card>

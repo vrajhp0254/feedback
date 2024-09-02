@@ -36,7 +36,7 @@ export async function POST(request: Request) {
         success: true,
         message: "Message sent succesfully",
       },
-      { status: 401 }
+      { status: 200 }
     );
   } catch (error) {
     console.log("Error sending messages");

@@ -126,8 +126,8 @@ export default function SignUpForm() {
                     <p
                       className={`text-sm ${
                         usernameMessage === "Username is unique"
-                          ? "text-green-500"
-                          : "text-red-500"
+                          ? "text-red-500"
+                          : "text-green-500"
                       }`}
                     >
                       {usernameMessage}

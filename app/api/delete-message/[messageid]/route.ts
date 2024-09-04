@@ -20,13 +20,11 @@ export async function DELETE(
   }
   const userId = new mongoose.Types.ObjectId(_user._id);
   const messageId = new mongoose.Types.ObjectId(params.messageid);
-  console.log(userId,messageId)
   try {
     const updateResult = await UserModel.updateOne(
       { _id: userId },
       { $pull: { messages: { _id: messageId } } }
     );
-    console.log("is it",updateResult);
     if (updateResult.modifiedCount === 0) {
       return Response.json(
         { message: "Message not found or already deleted", success: false },

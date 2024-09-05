@@ -129,9 +129,14 @@ function UserDashboard() {
     navigator.clipboard.writeText(profileUrl);
     toast({
       title: "URL Copied!",
-      description: "Profile URL has been copied to clipboard.",
+      description: "Paste it in new tab to share",
     });
   };
+  
+    const directmessage = () => {
+      window.open(profileUrl, "_blank");
+    };
+  
 
   return (
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
@@ -139,7 +144,7 @@ function UserDashboard() {
 
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{" "}
-        <div className="flex items-center">
+        <div className="flex items-center gap-5">
           <input
             type="text"
             value={profileUrl}
@@ -147,6 +152,7 @@ function UserDashboard() {
             className="input input-bordered w-full p-2 mr-2"
           />
           <Button onClick={copyToClipboard}>Copy</Button>
+          <Button onClick={directmessage}>Message</Button>
         </div>
       </div>
 

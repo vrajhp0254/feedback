@@ -30,7 +30,6 @@
 import mailjet from 'node-mailjet';
 
 export async function sendVerificationEmail(email: string,username: string, verifycode: string) {
-  console.log("Sending verification email to", email);
   try {
     const mailjetClient = mailjet.apiConnect(process.env.MAILJET_API_KEY as string, process.env.MAILJET_SECRET_KEY as string);
     const request = mailjetClient.post("send", { 'version': 'v3.1' }).request({
@@ -38,7 +37,7 @@ export async function sendVerificationEmail(email: string,username: string, veri
         {
           "From": {
             "Email": "vrajhp0254@gmail.com",
-            "Name": "Vraj Patel"
+            "Name": "Feedback"
           },
           "To": [
             {

@@ -1,48 +1,106 @@
+# True Feedback - Anonymous Feedback Application
 
-## Feedback Application with AI Integration
+True Feedback is a full-stack application built with Next.js that enables users to send and receive anonymous feedback. The platform incorporates AI capabilities to enhance the feedback experience and includes robust security features.
 
-The Feedback Application is a powerful tool that allows multiple users to provide feedback to a single user. With the integration of AI capabilities, the application goes beyond simple feedback collection.
+## Key Features
 
-Key Features:
+- **Anonymous Feedback**: Users can submit feedback anonymously, ensuring honest and unbiased responses
+- **AI-Powered Suggestions**: Intelligent suggestion system using Gemini AI for generating contextual feedback prompts
+- **Secure Authentication**: Email verification and OTP-based security system
+- **Real-time Updates**: Instant feedback notifications and updates
+- **User Dashboard**: Comprehensive dashboard to manage received feedback
+- **Message Management**: Users can control their message acceptance settings
 
-- **Anonymous Feedback**: Users can submit feedback anonymously, ensuring honest and unbiased responses.
+## Tech Stack
 
-- **Intelligent Suggestions**: Based on the AI analysis, the application generates intelligent suggestions for improvement. These suggestions are tailored to the specific user and their feedback patterns.
+- **Frontend**: Next.js 14, React, TypeScript
+- **Styling**: Tailwind CSS, Shadcn UI
+- **Authentication**: NextAuth.js
+- **Database**: MongoDB with Mongoose
+- **Email Service**: Mailjet
+- **AI Integration**: Google Gemini AI
+- **Form Handling**: React Hook Form, Zod
+- **API**: RESTful API endpoints
 
-- **Verification Emails**: To ensure the authenticity of the feedback, the application sends verification emails to users. This helps in filtering out spam and ensures that only genuine feedback is considered.
+## Prerequisites
 
-- **OTP Verification**: User identity is verified using one-time passwords (OTPs). This adds an extra layer of security and prevents misuse of the feedback system.
+Before you begin, ensure you have the following installed:
+- Node.js (v18 or higher)
+- npm or yarn
+- MongoDB instance
 
-## YouTube-Tutorial-Based Project - (chai-aur-code)
+## Environment Variables
 
-## Full Stack Project with Next.js and AI Integration
+Create a `.env` file in the root directory with the following variables:
+- MONGODB_URI=your_mongodb_connection_string
+- NEXTAUTH_SECRET=your_nextauth_secret
+- NEXTAUTH_URL=http://localhost:3000
+- MAILJET_API_KEY=your_mailjet_api_key
+- MAILJET_SECRET_KEY=your_mailjet_secret_key
+- GEMINI_API_KEY=your_gemini_api_key
 
-In this project, i will be building a full stack application using Next.js and integrating AI capabilities. We will be using the following technologies and libraries:
+## Installation
 
-- Next.js: A popular React framework for building server-side rendered and static websites.
-- Zod: A TypeScript-first schema validation library for data validation and serialization.
-- Mailjet Email: A feature that allows users to send verification emails.
-- Shadcn UI Libraries: A collection of UI components for building beautiful and responsive user interfaces.
-- OTP Verification: A mechanism for verifying user identity using one-time passwords.
-- AI for Anonymous Feedback: We will be integrating AI capabilities to analyze and process anonymous feedback from users.
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/true-feedback.git
+cd true-feedback
+```
 
-Getting Started:
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
 
-1. Clone the repository and navigate to the project directory.
-2. Install the dependencies by running the following command:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-3. Start the development server by running the following command:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to access the application.
+3. Run the development server:
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-Explore the Next.js documentation for more information on its features and API. You can also refer to the provided resources for additional guidance on Next.js and deploying your application on Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-Happy coding!
+## Project Structure
+
+- `/app` - Next.js application routes and API endpoints
+- `/components` - Reusable React components
+- `/lib` - Utility functions and configurations
+- `/models` - MongoDB schema definitions
+- `/schemas` - Zod validation schemas
+- `/types` - TypeScript type definitions
+- `/emails` - Email templates
+
+## Contributing
+
+We welcome contributions to True Feedback! Here's how you can help:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests and ensure code quality
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Contribution Guidelines
+
+- Follow the existing code style and conventions
+- Write clear commit messages
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting PR
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details
+
+## Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- UI components from [shadcn/ui](https://ui.shadcn.com/)
+- Authentication powered by [NextAuth.js](https://next-auth.js.org/)
+- AI capabilities by [Google Gemini](https://ai.google.dev/)
+
